@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% include "head.html"%}
+</head>
+<body>
+{% include "header.html" %}
+	<div id="main">
+		<div id="content">
+			<div id="iteminfo">
+				<h2 style="text-align: center;">Add a new Sports category</h2>
+				<form action="{{url_for('new_sport')}}" method="post" enctype="multipart/form-data">
+					<div style="display: table; width: 400px; margin: auto;">
+						<div style="float:left; text-align: right; padding: 7px; font-weight:bold;">
+							<p>Sports Category:</p>
+						</div>
+						<div style="float: left; padding: 7px;">
+							<p>
+								<input type="text" name="name" style="width: 200px;" /><br/>
+								<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+								<input type="submit" value="Add Sport" />
+								<a href="{{url_for('sports')}}">Cancel</a>
+								<br/>
+							</p>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="clearfix"></div>
+		<div>
+	</div>
+{% include "footer.html" %}
+{% include "messages.html" %}
+</body>
+</html>

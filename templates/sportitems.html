@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% include "head.html" %}
+</head>
+<body>
+{% include "header.html" %}
+	<div id="main">
+		<div id="content">
+			<div style="float: left; text-indent: -111px; padding; bottom: -27px; font-size: 15pt;">&#171; <a href="/">Home</a></div>
+			<div id="categories">
+				<!--<h2>Sport Categories</h2>-->
+				<ul>
+					{% for c in categories %}
+					<li width="300px"><a href="{{url_for('sport_items',sport_id=c.id)}}">{{ c.name }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div id="items">
+
+				{% if 'username' in session %}
+				<div><a id="myitems" href="{{url_for('my_items')}}">My items</a></div>
+				{% endif %}
+
+				<h2 style="text-indent: -11px">{{ sport.name }} items ({{count}})</h2>
+				{% if 'username' in session %}
+				<div><a id="additem" href="{{url_for('new_item',sport_id=sport.id)}}">Add item</a></div>
+				{% endif %}
+				<ul>
+					{% for i in items %}
+					<li><a href="{{url_for('item_info',sport_id=i.sport_id, item_id=i.id)}}">{{ i.name }}</a></li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+{% include "footer.html" %}
+{% include "messages.html" %}
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+{% include "head.html" %}
+</head>
+<body>
+{% include "header.html" %}
+	<div id="main">
+		<div id="content">
+			<div id="iteminfo" style="text-align: center; line-height: 200%;">
+				<h3>Are you sure you want to delete the<br />
+					<em>{{item.name}}</em><br />
+					from the <em>{{sport.name}}</em> category?</h3>
+
+				{% if item.image %}
+				<img style="margin: auto;" src="{{ url_for('static', filename='item_images/' + item.image) }}" />
+				{% endif %}
+
+
+				<form action="{{ url_for('delete_item', sport_id=sport_id, item_id=item_id )}}" method="post">
+
+					<div>
+						<input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+						<input type="submit" value="Delete Item" /><br />
+						<p style="margin-top: 0;"><a href="{{ url_for('item_info', sport_id=item.sport_id, item_id=item.id )}}">Cancel</a></p>
+					</div>
+
+				</form>
+
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+{% include "footer.html" %}
+</body>
+</html>
